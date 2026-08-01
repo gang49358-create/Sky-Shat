@@ -488,3 +488,76 @@ function logout(){
     window.location.href = "index.html";
 
 }
+function showMessages(){
+
+
+let box =
+document.getElementById("messages");
+
+
+if(!box) return;
+
+
+box.innerHTML = "";
+
+
+
+let chatUser =
+localStorage.getItem("chatUser");
+
+
+let myName =
+localStorage.getItem("username");
+
+
+
+let chats =
+JSON.parse(localStorage.getItem("chats")) || [];
+
+
+
+chats.forEach(function(msg){
+
+
+if(
+(msg.from === myName && msg.to === chatUser) ||
+(msg.from === chatUser && msg.to === myName)
+){
+
+
+let div =
+document.createElement("div");
+
+
+div.className =
+"message";
+
+
+div.innerHTML =
+
+`
+${msg.from}: ${msg.text}
+<br>
+<small>${msg.time}</small>
+`;
+
+
+
+box.appendChild(div);
+
+
+}
+
+
+});
+
+
+}
+
+
+
+if(document.getElementById("messages")){
+
+showMessages();
+
+}
