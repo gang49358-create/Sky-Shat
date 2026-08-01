@@ -383,3 +383,13 @@ function sendMessage(){
     input.value = "";
 
 }
+// =========================
+// ОТКРЫТЬ ПОЛЬЗОВАТЕЛЕЙ
+// =========================
+
+function openUsers(){
+
+    window.location.href =
+    "users.html";
+
+}
