@@ -1,7 +1,52 @@
 // =========================
-// РЕГИСТРАЦИЯ
+// КНОПКИ ГЛАВНОЙ СТРАНИЦЫ
 // =========================
 
+document.addEventListener("DOMContentLoaded", function(){
+
+
+let registerButton =
+document.querySelector(".register");
+
+
+let loginButton =
+document.querySelector(".login");
+
+
+
+if(registerButton){
+
+registerButton.onclick = function(){
+
+window.location.href =
+"register.html";
+
+}
+
+}
+
+
+
+if(loginButton){
+
+loginButton.onclick = function(){
+
+window.location.href =
+"login.html";
+
+}
+
+}
+
+
+
+});
+
+
+
+// =========================
+// РЕГИСТРАЦИЯ
+// =========================
 
 function registerUser(){
 
@@ -15,10 +60,12 @@ document.getElementById("password").value;
 
 
 
-if(username === "" || password === ""){
+if(username==="" || password===""){
+
 
 document.getElementById("message").innerText =
 "Заполни все поля ❌";
+
 
 return;
 
@@ -30,7 +77,6 @@ localStorage.setItem(
 "username",
 username
 );
-
 
 
 localStorage.setItem(
@@ -63,15 +109,14 @@ JSON.stringify(users)
 document.getElementById("message").innerText =
 "Аккаунт создан ✅";
 
-
 }
+
 
 
 
 // =========================
 // ВХОД
 // =========================
-
 
 function loginUser(){
 
@@ -94,9 +139,10 @@ localStorage.getItem("password");
 
 
 
-if(username === savedUsername &&
-password === savedPassword){
-
+if(
+username === savedUsername &&
+password === savedPassword
+){
 
 
 localStorage.setItem(
@@ -105,13 +151,13 @@ localStorage.setItem(
 );
 
 
-
 window.location.href =
 "chat.html";
 
 
+}
 
-}else{
+else{
 
 
 document.getElementById("message").innerText =
@@ -123,24 +169,6 @@ document.getElementById("message").innerText =
 
 }
 
-
-
-// =========================
-// ВЫХОД
-// =========================
-
-
-function logout(){
-
-
-localStorage.removeItem("online");
-
-
-window.location.href =
-"index.html";
-
-
-}
 
 
 
@@ -166,7 +194,7 @@ let box =
 document.getElementById("users");
 
 
-if(!box) return;
+if(!box)return;
 
 
 
@@ -175,7 +203,7 @@ JSON.parse(localStorage.getItem("users")) || [];
 
 
 
-box.innerHTML = "";
+box.innerHTML="";
 
 
 
@@ -186,22 +214,13 @@ let div =
 document.createElement("div");
 
 
-
 div.className =
 "message";
 
 
-
-div.innerHTML = `
-
+div.innerHTML =
+`
 👤 ${user}
-
-<button onclick="openChat('${user}')">
-
-Написать
-
-</button>
-
 `;
 
 
@@ -226,264 +245,70 @@ loadUsers();
 
 
 
-
-function openChat(user){
-
-
-localStorage.setItem(
-"chatUser",
-user
-);
-
-
-
-window.location.href =
-"chat-user.html";
-
-
-}
-
-
-
-
 // =========================
-// ИМЯ ЧАТА
+// ПРОФИЛЬ
 // =========================
-
-
-function loadChatUser(){
-
-
-let user =
-localStorage.getItem("chatUser");
-
-
-let title =
-document.getElementById("chatName");
-
-
-
-if(title && user){
-
-title.innerText =
-"Чат с " + user;
-
-}
-
-
-}
-
-
-
-if(document.getElementById("chatName")){
-
-loadChatUser();
-
-}
-
-
-
-
-// =========================
-// ОТПРАВКА СООБЩЕНИЙ
-// =========================
-
-
-function sendMessage(){
-
-
-let input =
-document.getElementById("text");
-
-
-
-if(!input || input.value.trim() === ""){
-
-return;
-
-}
-
-
-
-let messages =
-JSON.parse(
-localStorage.getItem("messages")
-) || [];
-
-
-
-let newMessage = {
-
-
-from:
-localStorage.getItem("username"),
-
-
-
-to:
-localStorage.getItem("chatUser"),
-
-
-
-text:
-input.value,
-
-
-
-time:
-new Date().toLocaleString()
-
-};
-
-
-
-messages.push(newMessage);
-
-
-
-localStorage.setItem(
-"messages",
-JSON.stringify(messages)
-);
-
-
-
-input.value = "";
-
-
-
-showMessages();
-
-
-}
-
-
-
-
-// =========================
-// ПОКАЗ СООБЩЕНИЙ
-// =========================
-
-
-function showMessages(){
-
-
-let box =
-document.getElementById("messages");
-
-
-
-if(!box){
-
-return;
-
-}
-
-
-
-box.innerHTML = "";
-
-
-
-let me =
-localStorage.getItem("username");
-
-
-let user =
-localStorage.getItem("chatUser");
-
-
-
-let messages =
-JSON.parse(
-localStorage.getItem("messages")
-) || [];
-
-
-
-messages.forEach(function(msg){
-
-
-
-if(
-
-(msg.from === me && msg.to === user)
-
-||
-
-(msg.from === user && msg.to === me)
-
-){
-
-
-
-let div =
-document.createElement("div");
-
-
-
-div.className =
-"message";
-
-
-
-div.innerHTML = `
-
-<b>${msg.from}</b>: ${msg.text}
-
-<br>
-
-⏰ ${msg.time}
-
-`;
-
-
-
-box.appendChild(div);
-
-
-
-}
-
-
-
-});
-
-
-
-}
-
-
-
-if(document.getElementById("messages")){
-
-showMessages();
-
-}
-// =========================
-// ДОПОЛНИТЕЛЬНЫЕ КНОПКИ
-// =========================
-
-function openUsers(){
-
-    window.location.href = "users.html";
-
-}
-
 
 
 function openProfile(){
 
-    window.location.href = "profile.html";
+window.location.href =
+"profile.html";
 
 }
 
 
 
+function loadProfile(){
+
+
+let username =
+localStorage.getItem("username");
+
+
+
+let profile =
+document.getElementById("profile");
+
+
+
+if(profile && username){
+
+
+profile.innerHTML =
+`
+<h2>👤 ${username}</h2>
+
+<p>Статус: 🟢 Онлайн</p>
+`;
+
+}
+
+
+}
+
+
+
+if(document.getElementById("profile")){
+
+loadProfile();
+
+}
+
+
+
+
+// =========================
+// ВЫХОД
+// =========================
+
+
 function logout(){
 
-    localStorage.removeItem("online");
+localStorage.removeItem("online");
 
-    window.location.href = "index.html";
+
+window.location.href =
+"index.html";
 
 }
