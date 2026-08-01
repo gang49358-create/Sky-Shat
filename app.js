@@ -1,6 +1,4 @@
-// ===============================
-// КНОПКИ ГЛАВНОЙ СТРАНИЦЫ
-// ===============================
+alert("SkyChat запущен");
 
 const registerButton = document.querySelector(".register");
 const loginButton = document.querySelector(".login");
