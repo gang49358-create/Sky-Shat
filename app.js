@@ -343,6 +343,70 @@ if(document.getElementById("chatName")){
 
 function sendMessage(){
 
+let input =
+document.getElementById("text");
+
+
+let messages =
+document.getElementById("messages");
+
+
+
+if(input.value === ""){
+
+return;
+
+}
+
+
+
+let myName =
+localStorage.getItem("username");
+
+
+let chatUser =
+localStorage.getItem("chatUser");
+
+
+
+let chats =
+JSON.parse(localStorage.getItem("chats")) || [];
+
+
+
+let newMessage = {
+
+from: myName,
+
+to: chatUser,
+
+text: input.value,
+
+time: new Date().toLocaleTimeString()
+
+};
+
+
+
+chats.push(newMessage);
+
+
+
+localStorage.setItem(
+"chats",
+JSON.stringify(chats)
+);
+
+
+
+showMessages();
+
+
+
+input.value = "";
+
+}
+
 
     let input =
     document.getElementById("text");
