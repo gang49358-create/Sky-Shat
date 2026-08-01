@@ -247,3 +247,8 @@ if(document.getElementById("profile")){
 loadProfile();
 
 }
+function openProfile(){
+
+window.location.href="profile.html";
+
+}
