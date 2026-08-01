@@ -1,4 +1,6 @@
-alert("SkyChat запущен");
+// =========================
+// ПЕРЕХОДЫ НА ГЛАВНОЙ
+// =========================
 
 const registerButton = document.querySelector(".register");
 const loginButton = document.querySelector(".login");
@@ -7,7 +9,9 @@ const loginButton = document.querySelector(".login");
 if (registerButton) {
 
     registerButton.onclick = function () {
+
         window.location.href = "register.html";
+
     };
 
 }
@@ -16,30 +20,37 @@ if (registerButton) {
 if (loginButton) {
 
     loginButton.onclick = function () {
+
         window.location.href = "login.html";
+
     };
 
 }
 
 
 
-// ===============================
+// =========================
 // РЕГИСТРАЦИЯ
-// ===============================
+// =========================
 
 function registerUser() {
 
 
-    let username = document.getElementById("username").value;
+    let username =
+    document.getElementById("username").value;
 
-    let password = document.getElementById("password").value;
+
+    let password =
+    document.getElementById("password").value;
 
 
 
     if (username === "" || password === "") {
 
+
         document.getElementById("message").innerText =
         "Заполни все поля ❌";
+
 
         return;
 
@@ -62,7 +73,7 @@ function registerUser() {
 
 
 
-    // добавляем пользователя в список
+    // сохраняем список пользователей
 
     let users =
     JSON.parse(localStorage.getItem("users")) || [];
@@ -91,12 +102,13 @@ function registerUser() {
 
 
 
-// ===============================
+
+// =========================
 // ВХОД
-// ===============================
+// =========================
 
 function loginUser() {
-alert("Функция входа работает");
+
 
     let username =
     document.getElementById("loginUsername").value;
@@ -116,7 +128,6 @@ alert("Функция входа работает");
 
 
 
-
     if (
         username === savedUsername &&
         password === savedPassword
@@ -133,9 +144,7 @@ alert("Функция входа работает");
         "chat.html";
 
 
-    }
-
-    else {
+    } else {
 
 
         document.getElementById("message").innerText =
@@ -149,9 +158,10 @@ alert("Функция входа работает");
 
 
 
-// ===============================
+
+// =========================
 // ВЫХОД
-// ===============================
+// =========================
 
 function logout() {
 
@@ -167,11 +177,9 @@ function logout() {
 
 
 
-
-// ===============================
+// =========================
 // ПРОФИЛЬ
-// ===============================
-
+// =========================
 
 function loadProfile() {
 
@@ -184,24 +192,20 @@ function loadProfile() {
     document.getElementById("profile");
 
 
-
     if(profile && username){
 
 
-        profile.innerHTML = `
+        profile.innerHTML =
 
+        `
         <h2>👤 ${username}</h2>
-
         <p>Статус: 🟢 Онлайн</p>
-
         `;
 
 
     }
 
-
 }
-
 
 
 if(document.getElementById("profile")){
@@ -212,14 +216,12 @@ if(document.getElementById("profile")){
 
 
 
-
 function openProfile(){
 
     window.location.href =
     "profile.html";
 
 }
-
 
 
 
@@ -233,25 +235,23 @@ function goChat(){
 
 
 
-
-// ===============================
+// =========================
 // ПОЛЬЗОВАТЕЛИ
-// ===============================
-
+// =========================
 
 function loadUsers(){
-
-
-    let users =
-    JSON.parse(localStorage.getItem("users")) || [];
 
 
     let box =
     document.getElementById("users");
 
 
-
     if(!box) return;
+
+
+
+    let users =
+    JSON.parse(localStorage.getItem("users")) || [];
 
 
 
@@ -268,7 +268,6 @@ function loadUsers(){
 
         item.innerText =
         "👤 " + user;
-
 
 
         box.appendChild(item);
@@ -289,7 +288,6 @@ if(document.getElementById("users")){
 
 
 
-
 function openUsers(){
 
     window.location.href =
@@ -300,16 +298,20 @@ function openUsers(){
 
 
 
-// ===============================
+// =========================
 // ЧАТ
-// ===============================
-
+// =========================
 
 function sendMessage(){
 
 
     let input =
     document.getElementById("text");
+
+
+    let messages =
+    document.getElementById("messages");
+
 
 
     if(!input || input.value === ""){
@@ -324,10 +326,8 @@ function sendMessage(){
     document.createElement("div");
 
 
-
     message.className =
     "message";
-
 
 
     message.innerText =
@@ -335,9 +335,7 @@ function sendMessage(){
 
 
 
-    document
-    .getElementById("messages")
-    .appendChild(message);
+    messages.appendChild(message);
 
 
 
