@@ -252,3 +252,41 @@ function openProfile(){
 window.location.href="profile.html";
 
 }
+function loadUsers(){
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+
+let box =
+document.getElementById("users");
+
+
+users.forEach(user=>{
+
+
+let item=document.createElement("div");
+
+
+item.className="message";
+
+
+item.innerHTML=
+"👤 " + user;
+
+
+box.appendChild(item);
+
+
+});
+
+
+}
+
+
+
+if(document.getElementById("users")){
+
+loadUsers();
+
+}
