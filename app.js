@@ -300,3 +300,8 @@ if(document.getElementById("users")){
 loadUsers();
 
 }
+function openUsers(){
+
+window.location.href="users.html";
+
+}
