@@ -1,289 +1,56 @@
-// =====================
-// ПЕРЕХОДЫ
-// =====================
+const chatBox =
+document.getElementById("chats");
 
-function openRegister(){
 
-    window.location.href = "register.html";
 
-}
+function renderChats(){
 
 
-function openLogin(){
+chatBox.innerHTML="";
 
-    window.location.href = "login.html";
 
-}
-
-
-
-// =====================
-// РЕГИСТРАЦИЯ
-// =====================
-
-function registerUser(){
-
-
-let username =
-document.getElementById("username").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-if(username === "" || password === ""){
-
-document.getElementById("message").innerText =
-"Заполни все поля ❌";
-
-return;
-
-}
-
-
-
-localStorage.setItem(
-"username",
-username
-);
-
-
-
-localStorage.setItem(
-"password",
-password
-);
-
-
-
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-
-
-if(!users.includes(username)){
-
-users.push(username);
-
-}
-
-
-
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
-
-
-
-document.getElementById("message").innerText =
-"Аккаунт создан ✅";
-
-
-}
-
-
-
-
-// =====================
-// ВХОД
-// =====================
-
-function loginUser(){
-
-
-let username =
-document.getElementById("loginUsername").value;
-
-
-let password =
-document.getElementById("loginPassword").value;
-
-
-
-let savedUsername =
-localStorage.getItem("username");
-
-
-let savedPassword =
-localStorage.getItem("password");
-
-
-
-if(
-username === savedUsername &&
-password === savedPassword
-){
-
-
-window.location.href =
-"chat.html";
-
-
-}
-
-else{
-
-
-document.getElementById("message").innerText =
-"Неверный логин или пароль ❌";
-
-
-}
-
-
-}
-
-
-
-
-// =====================
-// ЧАТ
-// =====================
-
-
-function sendMessage(){
-
-
-let input =
-document.getElementById("text");
-
-
-
-if(!input || input.value.trim() === ""){
-
-return;
-
-}
-
-
-
-let messages =
-JSON.parse(
-localStorage.getItem("messages")
-) || [];
-
-
-
-let newMessage = {
-
-
-user:
-localStorage.getItem("username"),
-
-
-text:
-input.value,
-
-
-time:
-new Date().toLocaleTimeString([], {
-hour:"2-digit",
-minute:"2-digit"
-})
-
-
-};
-
-
-
-messages.push(newMessage);
-
-
-
-localStorage.setItem(
-"messages",
-JSON.stringify(messages)
-);
-
-
-
-input.value = "";
-
-
-showMessages();
-
-
-}
-
-
-
-
-function showMessages(){
-
-
-let box =
-document.getElementById("messages");
-
-
-
-if(!box){
-
-return;
-
-}
-
-
-
-box.innerHTML = "";
-
-
-
-let myName =
-localStorage.getItem("username");
-
-
-
-let messages =
-JSON.parse(
-localStorage.getItem("messages")
-) || [];
-
-
-
-messages.forEach(function(msg){
-
+chats.forEach(chat=>{
 
 
 let div =
 document.createElement("div");
 
 
-
-if(msg.user === myName){
-
-
-div.className =
-"message sent";
+div.className="chat-item";
 
 
-}
-else{
+div.innerHTML=`
+
+<div class="avatar">
+${chat.avatar}
+</div>
 
 
-div.className =
-"message received";
+<div>
 
-
-}
-
-
-
-div.innerHTML = `
-
-${msg.text}
+<b>${chat.name}</b>
 
 <br>
 
-<small>${msg.time}</small>
+<small>
+${chat.last}
+</small>
+
+</div>
 
 `;
 
 
 
-box.appendChild(div);
+div.onclick=()=>{
+
+openChat(chat.id);
+
+};
+
+
+
+chatBox.appendChild(div);
 
 
 
@@ -294,55 +61,86 @@ box.appendChild(div);
 
 
 
-if(document.getElementById("messages")){
+renderChats();
 
-showMessages();
+
+
+
+
+// отправка сообщений
+
+
+document
+.getElementById("send")
+.onclick=function(){
+
+
+let input =
+document.getElementById("messageInput");
+
+
+
+let text =
+input.value.trim();
+
+
+
+if(text){
+
+
+sendMessage(text);
+
+
+input.value="";
+
 
 }
 
 
+};
 
 
-// =====================
-// ЛЮДИ
-// =====================
 
 
-function openUsers(){
 
-window.location.href =
-"users.html";
+// Enter для отправки
+
+
+document
+.getElementById("messageInput")
+.addEventListener(
+"keypress",
+function(e){
+
+
+if(e.key==="Enter"){
+
+
+document
+.getElementById("send")
+.click();
+
 
 }
 
 
-
-
-// =====================
-// ПРОФИЛЬ
-// =====================
-
-
-function openProfile(){
-
-window.location.href =
-"profile.html";
-
-}
+});
 
 
 
 
-// =====================
-// ВЫХОД
-// =====================
+
+// Premium
 
 
-function logout(){
+document
+.getElementById("premium")
+.onclick=function(){
 
-localStorage.removeItem("online");
 
-window.location.href =
-"index.html";
+alert(
+"⭐ Dark Premium активирован!"
+);
 
-}
+
+};
