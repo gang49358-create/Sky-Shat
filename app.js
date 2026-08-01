@@ -1,24 +1,28 @@
 // =========================
-// КНОПКИ ГЛАВНОЙ СТРАНИЦЫ
+// ПЕРЕХОДЫ
 // =========================
 
 const registerButton = document.querySelector(".register");
 const loginButton = document.querySelector(".login");
 
 
-if (registerButton) {
+if(registerButton){
 
-    registerButton.onclick = function () {
+    registerButton.onclick = function(){
+
         window.location.href = "register.html";
+
     };
 
 }
 
 
-if (loginButton) {
+if(loginButton){
 
-    loginButton.onclick = function () {
+    loginButton.onclick = function(){
+
         window.location.href = "login.html";
+
     };
 
 }
@@ -29,8 +33,7 @@ if (loginButton) {
 // РЕГИСТРАЦИЯ
 // =========================
 
-function registerUser() {
-
+function registerUser(){
 
     let username =
     document.getElementById("username").value;
@@ -43,10 +46,8 @@ function registerUser() {
 
     if(username === "" || password === ""){
 
-
         document.getElementById("message").innerText =
         "Заполни все поля ❌";
-
 
         return;
 
@@ -102,7 +103,6 @@ function registerUser() {
 
 function loginUser(){
 
-
     let username =
     document.getElementById("loginUsername").value;
 
@@ -126,7 +126,6 @@ function loginUser(){
         password === savedPassword
     ){
 
-
         localStorage.setItem(
             "online",
             "true"
@@ -137,7 +136,7 @@ function loginUser(){
         "chat.html";
 
 
-    } else {
+    }else{
 
 
         document.getElementById("message").innerText =
@@ -148,6 +147,7 @@ function loginUser(){
 
 
 }
+
 
 
 
@@ -166,12 +166,12 @@ function logout(){
 
 
 
+
 // =========================
 // ПРОФИЛЬ
 // =========================
 
 function loadProfile(){
-
 
     let username =
     localStorage.getItem("username");
@@ -179,7 +179,6 @@ function loadProfile(){
 
     let profile =
     document.getElementById("profile");
-
 
 
     if(profile && username){
@@ -196,9 +195,7 @@ function loadProfile(){
 
     }
 
-
 }
-
 
 
 if(document.getElementById("profile")){
@@ -206,6 +203,7 @@ if(document.getElementById("profile")){
     loadProfile();
 
 }
+
 
 
 
@@ -218,13 +216,11 @@ function openProfile(){
 
 
 
-
 // =========================
 // ПОЛЬЗОВАТЕЛИ
 // =========================
 
 function loadUsers(){
-
 
     let box =
     document.getElementById("users");
@@ -236,6 +232,10 @@ function loadUsers(){
 
     let users =
     JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+    box.innerHTML = "";
 
 
 
@@ -282,8 +282,17 @@ if(document.getElementById("users")){
 
 
 
-function openChat(user){
+function openUsers(){
 
+    window.location.href =
+    "users.html";
+
+}
+
+
+
+
+function openChat(user){
 
     localStorage.setItem(
         "chatUser",
@@ -299,11 +308,10 @@ function openChat(user){
 
 
 // =========================
-// ЧАТ С ПОЛЬЗОВАТЕЛЕМ
+// ИМЯ СОБЕСЕДНИКА
 // =========================
 
 function loadChatUser(){
-
 
     let user =
     localStorage.getItem("chatUser");
@@ -316,16 +324,13 @@ function loadChatUser(){
 
     if(title && user){
 
-
         title.innerText =
         "Чат с " + user;
-
 
     }
 
 
 }
-
 
 
 if(document.getElementById("chatName")){
@@ -338,82 +343,13 @@ if(document.getElementById("chatName")){
 
 
 // =========================
-// ОТПРАВКА СООБЩЕНИЙ
+// ОТПРАВКА СООБЩЕНИЯ
 // =========================
 
 function sendMessage(){
 
-let input =
-document.getElementById("text");
-
-
-let messages =
-document.getElementById("messages");
-
-
-
-if(input.value === ""){
-
-return;
-
-}
-
-
-
-let myName =
-localStorage.getItem("username");
-
-
-let chatUser =
-localStorage.getItem("chatUser");
-
-
-
-let chats =
-JSON.parse(localStorage.getItem("chats")) || [];
-
-
-
-let newMessage = {
-
-from: myName,
-
-to: chatUser,
-
-text: input.value,
-
-time: new Date().toLocaleTimeString()
-
-};
-
-
-
-chats.push(newMessage);
-
-
-
-localStorage.setItem(
-"chats",
-JSON.stringify(chats)
-);
-
-
-
-showMessages();
-
-
-
-input.value = "";
-
-}
-
-
     let input =
     document.getElementById("text");
-
-
-    let messages =
-    document.getElementById("messages");
 
 
 
@@ -425,139 +361,26 @@ input.value = "";
 
 
 
-    let message =
-    document.createElement("div");
+    let messages =
+    JSON.parse(localStorage.getItem("chats")) || [];
 
 
 
-    message.className =
-    "message";
+    let message = {
 
+        from:
+        localStorage.getItem("username"),
 
 
-    message.innerText =
-    input.value;
+        to:
+        localStorage.getItem("chatUser"),
 
 
+        text:
+        input.value,
 
-    messages.appendChild(message);
 
+        time:
+        new Date().toLocaleTimeString()
 
-
-    input.value = "";
-
-}
-// =========================
-// ОТКРЫТЬ ПОЛЬЗОВАТЕЛЕЙ
-// =========================
-
-function openUsers(){
-
-    window.location.href =
-    "users.html";
-
-}
-alert("app.js загружен");
-
-
-function openUsers(){
-
-alert("Кнопка Люди работает");
-
-window.location.href="users.html";
-
-}
-function openUsers(){
-
-    window.location.href = "users.html";
-
-}
-
-
-function openProfile(){
-
-    window.location.href = "profile.html";
-
-}
-
-
-function logout(){
-
-    localStorage.removeItem("online");
-
-    window.location.href = "index.html";
-
-}
-function showMessages(){
-
-
-let box =
-document.getElementById("messages");
-
-
-if(!box) return;
-
-
-box.innerHTML = "";
-
-
-
-let chatUser =
-localStorage.getItem("chatUser");
-
-
-let myName =
-localStorage.getItem("username");
-
-
-
-let chats =
-JSON.parse(localStorage.getItem("chats")) || [];
-
-
-
-chats.forEach(function(msg){
-
-
-if(
-(msg.from === myName && msg.to === chatUser) ||
-(msg.from === chatUser && msg.to === myName)
-){
-
-
-let div =
-document.createElement("div");
-
-
-div.className =
-"message";
-
-
-div.innerHTML =
-
-`
-${msg.from}: ${msg.text}
-<br>
-<small>${msg.time}</small>
-`;
-
-
-
-box.appendChild(div);
-
-
-}
-
-
-});
-
-
-}
-
-
-
-if(document.getElementById("messages")){
-
-showMessages();
-
-}
+    };
