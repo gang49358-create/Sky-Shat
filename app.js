@@ -393,3 +393,13 @@ function openUsers(){
     "users.html";
 
 }
+alert("app.js загружен");
+
+
+function openUsers(){
+
+alert("Кнопка Люди работает");
+
+window.location.href="users.html";
+
+}
