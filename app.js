@@ -342,3 +342,15 @@ function sendMessage(){
 
 
 }
+function openChat(user){
+
+localStorage.setItem(
+"chatUser",
+user
+);
+
+
+window.location.href =
+"chat-user.html";
+
+}
