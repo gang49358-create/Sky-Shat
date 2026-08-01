@@ -1,17 +1,29 @@
 // =========================
-// ГЛАВНАЯ СТРАНИЦА
+// ПЕРЕХОДЫ НА ГЛАВНОЙ
 // =========================
 
-function openRegister(){
+const registerButton = document.querySelector(".register");
+const loginButton = document.querySelector(".login");
 
-    window.location.href = "register.html";
+
+if (registerButton) {
+
+    registerButton.onclick = function () {
+
+        window.location.href = "register.html";
+
+    };
 
 }
 
 
-function openLogin(){
+if (loginButton) {
 
-    window.location.href = "login.html";
+    loginButton.onclick = function () {
+
+        window.location.href = "login.html";
+
+    };
 
 }
 
@@ -21,7 +33,7 @@ function openLogin(){
 // РЕГИСТРАЦИЯ
 // =========================
 
-function registerUser(){
+function registerUser() {
 
 
     let username =
@@ -33,7 +45,7 @@ function registerUser(){
 
 
 
-    if(username === "" || password === ""){
+    if (username === "" || password === "") {
 
 
         document.getElementById("message").innerText =
@@ -46,11 +58,12 @@ function registerUser(){
 
 
 
+    // сохраняем аккаунт
+
     localStorage.setItem(
         "username",
         username
     );
-
 
 
     localStorage.setItem(
@@ -60,17 +73,17 @@ function registerUser(){
 
 
 
+    // сохраняем список пользователей
+
     let users =
     JSON.parse(localStorage.getItem("users")) || [];
 
 
-
-    if(!users.includes(username)){
+    if (!users.includes(username)) {
 
         users.push(username);
 
     }
-
 
 
     localStorage.setItem(
@@ -89,11 +102,12 @@ function registerUser(){
 
 
 
+
 // =========================
 // ВХОД
 // =========================
 
-function loginUser(){
+function loginUser() {
 
 
     let username =
@@ -114,10 +128,10 @@ function loginUser(){
 
 
 
-    if(
+    if (
         username === savedUsername &&
         password === savedPassword
-    ){
+    ) {
 
 
         localStorage.setItem(
@@ -126,13 +140,11 @@ function loginUser(){
         );
 
 
-
         window.location.href =
         "chat.html";
 
 
-    }
-    else{
+    } else {
 
 
         document.getElementById("message").innerText =
@@ -148,24 +160,90 @@ function loginUser(){
 
 
 // =========================
-// ПОЛЬЗОВАТЕЛИ
+// ВЫХОД
 // =========================
 
-function openUsers(){
+function logout() {
+
+
+    localStorage.removeItem("online");
+
 
     window.location.href =
-    "users.html";
+    "index.html";
+
 
 }
 
 
+
+// =========================
+// ПРОФИЛЬ
+// =========================
+
+function loadProfile() {
+
+
+    let username =
+    localStorage.getItem("username");
+
+
+    let profile =
+    document.getElementById("profile");
+
+
+    if(profile && username){
+
+
+        profile.innerHTML =
+
+        `
+        <h2>👤 ${username}</h2>
+        <p>Статус: 🟢 Онлайн</p>
+        `;
+
+
+    }
+
+}
+
+
+if(document.getElementById("profile")){
+
+    loadProfile();
+
+}
+
+
+
+function openProfile(){
+
+    window.location.href =
+    "profile.html";
+
+}
+
+
+
+function goChat(){
+
+    window.location.href =
+    "chat.html";
+
+}
+
+
+
+
+// =========================
+// ПОЛЬЗОВАТЕЛИ
+// =========================
 
 function loadUsers(){
 
 
     let box =
     document.getElementById("users");
-
 
 
     if(!box) return;
@@ -177,29 +255,22 @@ function loadUsers(){
 
 
 
-    box.innerHTML = "";
-
-
-
     users.forEach(function(user){
 
 
-        let div =
+        let item =
         document.createElement("div");
 
 
-
-        div.className =
+        item.className =
         "message";
 
 
-
-        div.innerHTML =
+        item.innerText =
         "👤 " + user;
 
 
-
-        box.appendChild(div);
+        box.appendChild(item);
 
 
     });
@@ -217,71 +288,58 @@ if(document.getElementById("users")){
 
 
 
-
-// =========================
-// ПРОФИЛЬ
-// =========================
-
-function openProfile(){
+function openUsers(){
 
     window.location.href =
-    "profile.html";
+    "users.html";
 
 }
 
 
 
-function loadProfile(){
+
+// =========================
+// ЧАТ
+// =========================
+
+function sendMessage(){
 
 
-    let username =
-    localStorage.getItem("username");
+    let input =
+    document.getElementById("text");
+
+
+    let messages =
+    document.getElementById("messages");
 
 
 
-    let profile =
-    document.getElementById("profile");
+    if(!input || input.value === ""){
 
-
-
-    if(profile && username){
-
-
-        profile.innerHTML = `
-
-        <h2>👤 ${username}</h2>
-
-        <p>Статус: 🟢 Онлайн</p>
-
-        `;
-
+        return;
 
     }
 
 
-}
+
+    let message =
+    document.createElement("div");
+
+
+    message.className =
+    "message";
+
+
+    message.innerText =
+    input.value;
 
 
 
-if(document.getElementById("profile")){
-
-    loadProfile();
-
-}
+    messages.appendChild(message);
 
 
 
+    input.value = "";
 
-// =========================
-// ВЫХОД
-// =========================
-
-function logout(){
-
-    localStorage.removeItem("online");
-
-
-    window.location.href =
-    "index.html";
 
 }
