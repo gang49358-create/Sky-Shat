@@ -1,225 +1,302 @@
+// Кнопки на главной странице
+
 const registerButton = document.querySelector(".register");
 const loginButton = document.querySelector(".login");
 
 
-// кнопка регистрации на главной странице
+if (registerButton) {
 
-if(registerButton){
-
-registerButton.onclick = function(){
-
-window.location.href="register.html";
-
-}
+    registerButton.onclick = function () {
+        window.location.href = "register.html";
+    };
 
 }
 
 
-// кнопка входа на главной странице
+if (loginButton) {
 
-if(loginButton){
-
-loginButton.onclick = function(){
-
-window.location.href="login.html";
-
-}
-
-}
-
-
-// регистрация
-
-function registerUser(){
-
-
-let username =
-document.getElementById("username").value;
-
-
-let password =
-document.getElementById("password").value;
-
-
-
-if(username==="" || password===""){
-
-document.getElementById("message").innerText =
-"Заполни все поля";
-
-return;
+    loginButton.onclick = function () {
+        window.location.href = "login.html";
+    };
 
 }
 
 
 
-localStorage.setItem(
-"username",
-username
-);
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
+// Регистрация пользователя
+
+function registerUser() {
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
 
-users.push(username);
+    if (username === "" || password === "") {
+
+        document.getElementById("message").innerText =
+            "Заполни все поля";
+
+        return;
+
+    }
 
 
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
+    // сохраняем текущего пользователя
 
-localStorage.setItem(
-"password",
-password
-);
+    localStorage.setItem(
+        "username",
+        username
+    );
 
 
-
-document.getElementById("message").innerText =
-"Аккаунт создан ✅";
-
-}
-
+    localStorage.setItem(
+        "password",
+        password
+    );
 
 
-// вход
+    // сохраняем список пользователей
 
-function loginUser(){
-
-
-let username =
-document.getElementById("loginUsername").value;
+    let users =
+        JSON.parse(localStorage.getItem("users")) || [];
 
 
-let password =
-document.getElementById("loginPassword").value;
+    if (!users.includes(username)) {
+
+        users.push(username);
+
+    }
 
 
-
-let savedUsername =
-localStorage.getItem("username");
-
-
-let savedPassword =
-localStorage.getItem("password");
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
 
 
-
-if(username === savedUsername &&
-password === savedPassword){
-
-
-localStorage.setItem(
-"online",
-"true"
-);
-
-
-window.location.href="chat.html";
-
-
-}
-
-else{
-
-
-document.getElementById("message").innerText =
-"Неверный логин или пароль ❌";
-
-
-}
-
-
-}
-
-function logout(){
-
-localStorage.removeItem("online");
-
-window.location.href="index.html";
-
-}
-function loadProfile(){
-
-let username = localStorage.getItem("username");
-
-
-if(username){
-
-document.getElementById("profile").innerHTML =
-
-`
-<h2>👤 ${username}</h2>
-
-<p>Статус: 🟢 Онлайн</p>
-
-`;
-
-}
+    document.getElementById("message").innerText =
+        "Аккаунт создан ✅";
 
 }
 
 
 
-function goChat(){
+// Вход пользователя
 
-window.location.href="chat.html";
+function loginUser() {
+
+
+    let username =
+        document.getElementById("loginUsername").value;
+
+
+    let password =
+        document.getElementById("loginPassword").value;
+
+
+
+    let savedUsername =
+        localStorage.getItem("username");
+
+
+    let savedPassword =
+        localStorage.getItem("password");
+
+
+
+    if (
+        username === savedUsername &&
+        password === savedPassword
+    ) {
+
+
+        localStorage.setItem(
+            "online",
+            "true"
+        );
+
+
+        window.location.href =
+            "chat.html";
+
+
+    } else {
+
+
+        document.getElementById("message").innerText =
+            "Неверный логин или пароль ❌";
+
+
+    }
+
+}
+
+
+
+// Выход
+
+function logout() {
+
+    localStorage.removeItem("online");
+
+    window.location.href =
+        "index.html";
 
 }
 
 
 
-if(document.getElementById("profile")){
+// Профиль
 
-loadProfile();
+function loadProfile() {
+
+
+    let username =
+        localStorage.getItem("username");
+
+
+    let profile =
+        document.getElementById("profile");
+
+
+    if (profile && username) {
+
+
+        profile.innerHTML = `
+
+        <h2>👤 ${username}</h2>
+
+        <p>Статус: 🟢 Онлайн</p>
+
+        `;
+
+    }
 
 }
-function openProfile(){
-
-window.location.href="profile.html";
-
-}
-function loadUsers(){
-
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
 
 
-let box =
-document.getElementById("users");
+function goChat() {
 
-
-users.forEach(user=>{
-
-
-let item=document.createElement("div");
-
-
-item.className="message";
-
-
-item.innerHTML=
-"👤 " + user;
-
-
-box.appendChild(item);
-
-
-});
-
+    window.location.href =
+        "chat.html";
 
 }
 
 
 
-if(document.getElementById("users")){
+if (document.getElementById("profile")) {
 
-loadUsers();
+    loadProfile();
 
 }
-function openUsers(){
 
-window.location.href="users.html";
+
+
+// Открыть профиль
+
+function openProfile() {
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+
+// Список пользователей
+
+function loadUsers() {
+
+
+    let users =
+        JSON.parse(localStorage.getItem("users")) || [];
+
+
+    let box =
+        document.getElementById("users");
+
+
+    if (!box) return;
+
+
+
+    users.forEach(function(user) {
+
+
+        let item =
+            document.createElement("div");
+
+
+        item.className =
+            "message";
+
+
+        item.innerHTML =
+            "👤 " + user;
+
+
+        box.appendChild(item);
+
+
+    });
+
+
+}
+
+
+
+if (document.getElementById("users")) {
+
+    loadUsers();
+
+}
+
+
+
+// Открыть пользователей
+
+function openUsers() {
+
+    window.location.href =
+        "users.html";
+
+}
+
+
+
+// Отправка сообщения в чате
+
+function sendMessage() {
+
+
+    let input =
+        document.getElementById("text");
+
+
+    if (!input || input.value === "") {
+
+        return;
+
+    }
+
+
+    let message =
+        document.createElement("div");
+
+
+    message.className =
+        "message";
+
+
+    message.innerText =
+        input.value;
+
+
+    document
+        .getElementById("messages")
+        .appendChild(message);
+
+
+    input.value = "";
 
 }
