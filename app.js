@@ -205,3 +205,10 @@ flex:1;
 width:60px;
 
 }
+function logout(){
+
+localStorage.removeItem("online");
+
+window.location.href="index.html";
+
+}
