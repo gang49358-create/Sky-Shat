@@ -403,3 +403,24 @@ alert("Кнопка Люди работает");
 window.location.href="users.html";
 
 }
+function openUsers(){
+
+    window.location.href = "users.html";
+
+}
+
+
+function openProfile(){
+
+    window.location.href = "profile.html";
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("online");
+
+    window.location.href = "index.html";
+
+}
