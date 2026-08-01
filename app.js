@@ -98,7 +98,7 @@ function registerUser() {
 // ===============================
 
 function loginUser() {
-
+alert("Функция входа работает");
 
     let username =
     document.getElementById("loginUsername").value;
