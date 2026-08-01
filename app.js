@@ -241,40 +241,39 @@ function goChat(){
 
 function loadUsers(){
 
+let box = document.getElementById("users");
 
-    let box =
-    document.getElementById("users");
-
-
-    if(!box) return;
+if(!box) return;
 
 
-
-    let users =
-    JSON.parse(localStorage.getItem("users")) || [];
-
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
 
 
-    users.forEach(function(user){
+users.forEach(function(user){
 
 
-        let item =
-        document.createElement("div");
+let item = document.createElement("div");
 
 
-        item.className =
-        "message";
+item.className = "message";
 
 
-        item.innerText =
-        "👤 " + user;
+item.innerHTML = `
+
+👤 ${user}
+
+<button onclick="openChat('${user}')">
+Написать
+</button>
+
+`;
 
 
-        box.appendChild(item);
+box.appendChild(item);
 
 
-    });
-
+});
 
 }
 
