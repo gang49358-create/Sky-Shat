@@ -1,5 +1,5 @@
 // =========================
-// ПЕРЕХОДЫ НА ГЛАВНОЙ
+// КНОПКИ ГЛАВНОЙ СТРАНИЦЫ
 // =========================
 
 const registerButton = document.querySelector(".register");
@@ -9,9 +9,7 @@ const loginButton = document.querySelector(".login");
 if (registerButton) {
 
     registerButton.onclick = function () {
-
         window.location.href = "register.html";
-
     };
 
 }
@@ -20,9 +18,7 @@ if (registerButton) {
 if (loginButton) {
 
     loginButton.onclick = function () {
-
         window.location.href = "login.html";
-
     };
 
 }
@@ -35,7 +31,6 @@ if (loginButton) {
 
 function registerUser() {
 
-
     let username =
     document.getElementById("username").value;
 
@@ -47,18 +42,14 @@ function registerUser() {
 
     if (username === "" || password === "") {
 
-
         document.getElementById("message").innerText =
         "Заполни все поля ❌";
-
 
         return;
 
     }
 
 
-
-    // сохраняем аккаунт
 
     localStorage.setItem(
         "username",
@@ -73,10 +64,9 @@ function registerUser() {
 
 
 
-    // сохраняем список пользователей
-
     let users =
     JSON.parse(localStorage.getItem("users")) || [];
+
 
 
     if (!users.includes(username)) {
@@ -84,6 +74,7 @@ function registerUser() {
         users.push(username);
 
     }
+
 
 
     localStorage.setItem(
@@ -96,10 +87,7 @@ function registerUser() {
     document.getElementById("message").innerText =
     "Аккаунт создан ✅";
 
-
 }
-
-
 
 
 
@@ -153,9 +141,7 @@ function loginUser() {
 
     }
 
-
 }
-
 
 
 
@@ -163,15 +149,12 @@ function loginUser() {
 // ВЫХОД
 // =========================
 
-function logout() {
-
+function logout(){
 
     localStorage.removeItem("online");
 
-
     window.location.href =
     "index.html";
-
 
 }
 
@@ -181,8 +164,7 @@ function logout() {
 // ПРОФИЛЬ
 // =========================
 
-function loadProfile() {
-
+function loadProfile(){
 
     let username =
     localStorage.getItem("username");
@@ -194,18 +176,18 @@ function loadProfile() {
 
     if(profile && username){
 
+        profile.innerHTML = `
 
-        profile.innerHTML =
-
-        `
         <h2>👤 ${username}</h2>
-        <p>Статус: 🟢 Онлайн</p>
-        `;
 
+        <p>Статус: 🟢 Онлайн</p>
+
+        `;
 
     }
 
 }
+
 
 
 if(document.getElementById("profile")){
@@ -234,46 +216,55 @@ function goChat(){
 
 
 
-
 // =========================
-// ПОЛЬЗОВАТЕЛИ
+// СПИСОК ПОЛЬЗОВАТЕЛЕЙ
 // =========================
 
 function loadUsers(){
 
-let box = document.getElementById("users");
 
-if(!box) return;
-
-
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
+    let box =
+    document.getElementById("users");
 
 
-users.forEach(function(user){
+    if(!box) return;
 
 
-let item = document.createElement("div");
+
+    let users =
+    JSON.parse(localStorage.getItem("users")) || [];
 
 
-item.className = "message";
+
+    users.forEach(function(user){
 
 
-item.innerHTML = `
-
-👤 ${user}
-
-<button onclick="openChat('${user}')">
-Написать
-</button>
-
-`;
+        let item =
+        document.createElement("div");
 
 
-box.appendChild(item);
+        item.className =
+        "message";
 
 
-});
+
+        item.innerHTML = `
+
+        👤 ${user}
+
+        <button onclick="openChat('${user}')">
+        Написать
+        </button>
+
+        `;
+
+
+
+        box.appendChild(item);
+
+
+    });
+
 
 }
 
@@ -287,18 +278,28 @@ if(document.getElementById("users")){
 
 
 
-function openUsers(){
+// =========================
+// ОТКРЫТЬ ЧАТ С ПОЛЬЗОВАТЕЛЕМ
+// =========================
+
+function openChat(user){
+
+
+    localStorage.setItem(
+        "chatUser",
+        user
+    );
+
 
     window.location.href =
-    "users.html";
+    "chat-user.html";
 
 }
 
 
 
-
 // =========================
-// ЧАТ
+// ОТПРАВКА СООБЩЕНИЙ
 // =========================
 
 function sendMessage(){
@@ -325,8 +326,10 @@ function sendMessage(){
     document.createElement("div");
 
 
+
     message.className =
     "message";
+
 
 
     message.innerText =
@@ -339,18 +342,5 @@ function sendMessage(){
 
 
     input.value = "";
-
-
-}
-function openChat(user){
-
-localStorage.setItem(
-"chatUser",
-user
-);
-
-
-window.location.href =
-"chat-user.html";
 
 }
