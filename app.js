@@ -212,3 +212,38 @@ localStorage.removeItem("online");
 window.location.href="index.html";
 
 }
+function loadProfile(){
+
+let username = localStorage.getItem("username");
+
+
+if(username){
+
+document.getElementById("profile").innerHTML =
+
+`
+<h2>👤 ${username}</h2>
+
+<p>Статус: 🟢 Онлайн</p>
+
+`;
+
+}
+
+}
+
+
+
+function goChat(){
+
+window.location.href="chat.html";
+
+}
+
+
+
+if(document.getElementById("profile")){
+
+loadProfile();
+
+}
