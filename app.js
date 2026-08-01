@@ -1,4 +1,15 @@
-// =========================
+function openRegister(){
+
+    window.location.href = "register.html";
+
+}
+
+
+function openLogin(){
+
+    window.location.href = "login.html";
+
+}// =========================
 // ПЕРЕХОДЫ НА ГЛАВНОЙ
 // =========================
 
