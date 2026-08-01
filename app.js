@@ -31,6 +31,7 @@ if (loginButton) {
 
 function registerUser() {
 
+
     let username =
     document.getElementById("username").value;
 
@@ -40,10 +41,12 @@ function registerUser() {
 
 
 
-    if (username === "" || password === "") {
+    if(username === "" || password === ""){
+
 
         document.getElementById("message").innerText =
         "Заполни все поля ❌";
+
 
         return;
 
@@ -69,7 +72,7 @@ function registerUser() {
 
 
 
-    if (!users.includes(username)) {
+    if(!users.includes(username)){
 
         users.push(username);
 
@@ -87,7 +90,9 @@ function registerUser() {
     document.getElementById("message").innerText =
     "Аккаунт создан ✅";
 
+
 }
+
 
 
 
@@ -95,7 +100,7 @@ function registerUser() {
 // ВХОД
 // =========================
 
-function loginUser() {
+function loginUser(){
 
 
     let username =
@@ -116,10 +121,10 @@ function loginUser() {
 
 
 
-    if (
+    if(
         username === savedUsername &&
         password === savedPassword
-    ) {
+    ){
 
 
         localStorage.setItem(
@@ -140,6 +145,7 @@ function loginUser() {
 
 
     }
+
 
 }
 
@@ -166,6 +172,7 @@ function logout(){
 
 function loadProfile(){
 
+
     let username =
     localStorage.getItem("username");
 
@@ -174,7 +181,9 @@ function loadProfile(){
     document.getElementById("profile");
 
 
+
     if(profile && username){
+
 
         profile.innerHTML = `
 
@@ -184,7 +193,9 @@ function loadProfile(){
 
         `;
 
+
     }
+
 
 }
 
@@ -207,17 +218,9 @@ function openProfile(){
 
 
 
-function goChat(){
-
-    window.location.href =
-    "chat.html";
-
-}
-
-
 
 // =========================
-// СПИСОК ПОЛЬЗОВАТЕЛЕЙ
+// ПОЛЬЗОВАТЕЛИ
 // =========================
 
 function loadUsers(){
@@ -278,9 +281,6 @@ if(document.getElementById("users")){
 
 
 
-// =========================
-// ОТКРЫТЬ ЧАТ С ПОЛЬЗОВАТЕЛЕМ
-// =========================
 
 function openChat(user){
 
@@ -295,6 +295,45 @@ function openChat(user){
     "chat-user.html";
 
 }
+
+
+
+// =========================
+// ЧАТ С ПОЛЬЗОВАТЕЛЕМ
+// =========================
+
+function loadChatUser(){
+
+
+    let user =
+    localStorage.getItem("chatUser");
+
+
+    let title =
+    document.getElementById("chatName");
+
+
+
+    if(title && user){
+
+
+        title.innerText =
+        "Чат с " + user;
+
+
+    }
+
+
+}
+
+
+
+if(document.getElementById("chatName")){
+
+    loadChatUser();
+
+}
+
 
 
 
