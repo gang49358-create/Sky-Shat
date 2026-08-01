@@ -1,46 +1,19 @@
 // =========================
-// КНОПКИ ГЛАВНОЙ СТРАНИЦЫ
+// ГЛАВНАЯ СТРАНИЦА
 // =========================
 
-document.addEventListener("DOMContentLoaded", function(){
+function openRegister(){
 
-
-let registerButton =
-document.querySelector(".register");
-
-
-let loginButton =
-document.querySelector(".login");
-
-
-
-if(registerButton){
-
-registerButton.onclick = function(){
-
-window.location.href =
-"register.html";
-
-}
+    window.location.href = "register.html";
 
 }
 
 
+function openLogin(){
 
-if(loginButton){
-
-loginButton.onclick = function(){
-
-window.location.href =
-"login.html";
+    window.location.href = "login.html";
 
 }
-
-}
-
-
-
-});
 
 
 
@@ -51,63 +24,65 @@ window.location.href =
 function registerUser(){
 
 
-let username =
-document.getElementById("username").value;
+    let username =
+    document.getElementById("username").value;
 
 
-let password =
-document.getElementById("password").value;
-
-
-
-if(username==="" || password===""){
-
-
-document.getElementById("message").innerText =
-"Заполни все поля ❌";
-
-
-return;
-
-}
+    let password =
+    document.getElementById("password").value;
 
 
 
-localStorage.setItem(
-"username",
-username
-);
+    if(username === "" || password === ""){
 
 
-localStorage.setItem(
-"password",
-password
-);
+        document.getElementById("message").innerText =
+        "Заполни все поля ❌";
 
 
+        return;
 
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
+    }
 
 
 
-if(!users.includes(username)){
-
-users.push(username);
-
-}
-
-
-
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
+    localStorage.setItem(
+        "username",
+        username
+    );
 
 
 
-document.getElementById("message").innerText =
-"Аккаунт создан ✅";
+    localStorage.setItem(
+        "password",
+        password
+    );
+
+
+
+    let users =
+    JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+    if(!users.includes(username)){
+
+        users.push(username);
+
+    }
+
+
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+
+
+    document.getElementById("message").innerText =
+    "Аккаунт создан ✅";
+
 
 }
 
@@ -121,50 +96,50 @@ document.getElementById("message").innerText =
 function loginUser(){
 
 
-let username =
-document.getElementById("loginUsername").value;
+    let username =
+    document.getElementById("loginUsername").value;
 
 
-let password =
-document.getElementById("loginPassword").value;
-
-
-
-let savedUsername =
-localStorage.getItem("username");
-
-
-let savedPassword =
-localStorage.getItem("password");
+    let password =
+    document.getElementById("loginPassword").value;
 
 
 
-if(
-username === savedUsername &&
-password === savedPassword
-){
+    let savedUsername =
+    localStorage.getItem("username");
 
 
-localStorage.setItem(
-"online",
-"true"
-);
+    let savedPassword =
+    localStorage.getItem("password");
 
 
-window.location.href =
-"chat.html";
+
+    if(
+        username === savedUsername &&
+        password === savedPassword
+    ){
 
 
-}
-
-else{
-
-
-document.getElementById("message").innerText =
-"Неверный логин или пароль ❌";
+        localStorage.setItem(
+            "online",
+            "true"
+        );
 
 
-}
+
+        window.location.href =
+        "chat.html";
+
+
+    }
+    else{
+
+
+        document.getElementById("message").innerText =
+        "Неверный логин или пароль ❌";
+
+
+    }
 
 
 }
@@ -173,63 +148,61 @@ document.getElementById("message").innerText =
 
 
 // =========================
-// ЛЮДИ
+// ПОЛЬЗОВАТЕЛИ
 // =========================
-
 
 function openUsers(){
 
-window.location.href =
-"users.html";
+    window.location.href =
+    "users.html";
 
 }
-
 
 
 
 function loadUsers(){
 
 
-let box =
-document.getElementById("users");
-
-
-if(!box)return;
+    let box =
+    document.getElementById("users");
 
 
 
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
+    if(!box) return;
 
 
 
-box.innerHTML="";
+    let users =
+    JSON.parse(localStorage.getItem("users")) || [];
 
 
 
-users.forEach(function(user){
-
-
-let div =
-document.createElement("div");
-
-
-div.className =
-"message";
-
-
-div.innerHTML =
-`
-👤 ${user}
-`;
+    box.innerHTML = "";
 
 
 
-box.appendChild(div);
+    users.forEach(function(user){
+
+
+        let div =
+        document.createElement("div");
 
 
 
-});
+        div.className =
+        "message";
+
+
+
+        div.innerHTML =
+        "👤 " + user;
+
+
+
+        box.appendChild(div);
+
+
+    });
 
 
 }
@@ -238,7 +211,7 @@ box.appendChild(div);
 
 if(document.getElementById("users")){
 
-loadUsers();
+    loadUsers();
 
 }
 
@@ -249,11 +222,10 @@ loadUsers();
 // ПРОФИЛЬ
 // =========================
 
-
 function openProfile(){
 
-window.location.href =
-"profile.html";
+    window.location.href =
+    "profile.html";
 
 }
 
@@ -262,27 +234,29 @@ window.location.href =
 function loadProfile(){
 
 
-let username =
-localStorage.getItem("username");
+    let username =
+    localStorage.getItem("username");
 
 
 
-let profile =
-document.getElementById("profile");
+    let profile =
+    document.getElementById("profile");
 
 
 
-if(profile && username){
+    if(profile && username){
 
 
-profile.innerHTML =
-`
-<h2>👤 ${username}</h2>
+        profile.innerHTML = `
 
-<p>Статус: 🟢 Онлайн</p>
-`;
+        <h2>👤 ${username}</h2>
 
-}
+        <p>Статус: 🟢 Онлайн</p>
+
+        `;
+
+
+    }
 
 
 }
@@ -291,7 +265,7 @@ profile.innerHTML =
 
 if(document.getElementById("profile")){
 
-loadProfile();
+    loadProfile();
 
 }
 
@@ -302,13 +276,12 @@ loadProfile();
 // ВЫХОД
 // =========================
 
-
 function logout(){
 
-localStorage.removeItem("online");
+    localStorage.removeItem("online");
 
 
-window.location.href =
-"index.html";
+    window.location.href =
+    "index.html";
 
 }
