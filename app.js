@@ -1,8 +1,10 @@
-// =====================
-// ПЕРЕХОДЫ
-// =====================
+alert("SkyChat JS работает");
 
+function openRegister(){
 
+window.location.href="register.html";
+
+}
 function openRegister(){
 
 window.location.href="register.html";
