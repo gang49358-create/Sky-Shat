@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SkyChat</title>
+<title>Dark Messenger</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-<div class="container">
+    <div class="sidebar">
 
-
-<h1>
-☁️ SkyChat
-</h1>
-
-
-<p>
-Новый мессенджер для общения
-</p>
+        <div class="header">
+            <h2>Dark Messenger</h2>
+            <button id="premium">
+                ⭐ Premium
+            </button>
+        </div>
 
 
-
-<button onclick="openRegister()">
-Регистрация
-</button>
-
+        <input 
+        id="search"
+        placeholder="Поиск">
 
 
-<button onclick="openLogin()">
-Войти
-</button>
+        <div id="chats"></div>
 
+
+    </div>
+
+
+
+    <div class="chat-window">
+
+
+        <div class="chat-header">
+
+            <div id="chatName">
+                Выберите чат
+            </div>
+
+        </div>
+
+
+        <div id="messages">
+
+        </div>
+
+
+
+        <div class="send-box">
+
+            <input 
+            id="messageInput"
+            placeholder="Сообщение">
+
+
+            <button id="send">
+                ➤
+            </button>
+
+        </div>
+
+
+    </div>
 
 
 </div>
 
 
-
+<script src="chats.js"></script>
+<script src="chat.js"></script>
 <script src="app.js"></script>
+
+
 </body>
 </html>
